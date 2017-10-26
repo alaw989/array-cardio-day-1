@@ -31,32 +31,29 @@
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
-    var y = [];
-    inventors.filter(function(x) {
-        if (x.year >= 1500 && x.year <= 1600) {
-            y.push(x);
-        }
-    });
+    const fifteen = inventors.filter(x => (x.year >= 1500 && x.year <= 1599));
 
-    console.log(y);
+    console.table(fifteen);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
-    var names = [];
-    inventors.map(x => {
-        names.push([x.first, x.last])
+
+    const names = inventors.map(x => {
+        return ([x.first + ' ' + x.last])
     });
 
-    console.log(names)
+    console.table(names)
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-    var oldYoung = []
-    inventors.sort(function(a) {
-        oldYoung.push(a.year);
-    })
 
-    console.log(oldYoung);
-
+    const ordered = inventors.sort(function(a, b) {
+        if (a.year > b.year) {
+            return 1
+        } else {
+            return -1
+        }
+    });
+ 
 
 
 
@@ -71,34 +68,39 @@
     })
     console.log(abs);
 
+    const totalYears = inventors.reduce((acc, currValue, currIndex) => 
+      currValue.Year - currValue.passed
+    );
+
+    console.log(totalYears)
+
 
 
 
     // 5. Sort the inventors by years lived
-     var invLife = []
+    var invLife = []
 
-     inventors.reduce(function(acc, currValue, currIndex) {
+    inventors.reduce(function(acc, currValue, currIndex) {
 
         currValue.age = Math.abs(currValue.year - currValue.passed)
-       invLife.push(currValue)
-     })
-     console.log(invLife)
-     var fox = []
-    
-    function compare(a,b) {
-      let comparison = 0;
-      if (a.age > b.age) {
-        comparison = 1;
-      }
-      else if (a.age < b.age) {
-        comparison = -1;
-      }
-return comparison;
+        invLife.push(currValue)
+    })
+    console.log(invLife)
+    var fox = []
+
+    function compare(a, b) {
+        let comparison = 0;
+        if (a.age > b.age) {
+            comparison = 1;
+        } else if (a.age < b.age) {
+            comparison = -1;
+        }
+        return comparison;
 
     }
     invLife.sort(compare);
 
-     console.log(fox)
+    console.log(fox)
 
 
 
@@ -110,30 +112,27 @@ return comparison;
     // 7. sort Exercise
     // Sort the people alphabetically by last name
     lastNames = []
-       people.forEach(function (x) {
-          var first = x.indexOf(' ')
-          var lastName = x.substring(first, x.length)
-          lastNames.push(lastName.trim())
-       });
+    people.forEach(function(x) {
+        var first = x.indexOf(' ')
+        var lastName = x.substring(first, x.length)
+        lastNames.push(lastName.trim())
+    });
 
-       console.log(lastNames.sort())
+    console.log(lastNames.sort())
 
-       
+
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck'];
 
-    var countedNames = data.reduce(function (allNames, name) { 
-      if (name in allNames) {
-        allNames[name]++;
-      }
-      else {
-        allNames[name] = 1;
-      }
- 
-}, {});
+    var countedNames = data.reduce(function(allNames, name) {
+        if (name in allNames) {
+            allNames[name]++;
+        } else {
+            allNames[name] = 1;
+        }
 
-
+    }, {});
     </script>
 </body>
 
